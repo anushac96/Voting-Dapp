@@ -12,7 +12,7 @@ The repository contains the code for both the smart contract and the frontend ap
 
 ## Pre-requestis
 1. Npm and node should be installed
-2. truffle 
+2. Truffle 
 3. Metamask extension in the browser
 
 ## Quick Start
