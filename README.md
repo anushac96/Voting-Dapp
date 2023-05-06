@@ -28,7 +28,7 @@ The repository contains the code for both the smart contract and the frontend ap
 ### Steps to run the forntend application(terminal 2)
 1. Copy and paste the Voting.json file generated in contract-folder/build after migrating the contract in the web_app/src directory.
 2. Install dependencies: `npm install`
-3. Make sure truffle is running in terminal 1. If not then run truffle with the command: `truffle develop`
+3. Make sure truffle is running in terminal 1. If not then run truffle with the command: `truffle develop --seed="test"`
 4. Open metamask and create accounts for voters and candidates by using accounts provided by truffle
 5. Run the react app: `npm start`
 
