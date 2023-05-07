@@ -138,8 +138,6 @@ function AdminComponent({account, contractInstance}) {
                         <CardContent>
                             <TextField id="outlined-basic" label="Start New Election" variant="outlined" style={{width: '100%'}}
                                 onChange={(e)=>setElectionName(e.target.value)}/>
-                            <TextField id="outlined-basic" label="Delegate Your Vote From" variant="outlined" style={{width: '100%'}}
-                                onChange={(e)=>setDelegateFrom(e.target.value)}/>
                         </CardContent>
                         <CardActions>
                             <Button variant="contained" onClick={start_new_election}>Start New Election</Button>
@@ -153,6 +151,8 @@ function AdminComponent({account, contractInstance}) {
                         <CardContent>
                             <TextField id="outlined-basic" label="Delegate Your Vote" variant="outlined" style={{width: '100%'}}
                                 onChange={(e)=>setDelegateTo(e.target.value)}/>
+                            <TextField id="outlined-basic" label="Delegate Your Vote From" variant="outlined" style={{width: '100%'}}
+                                onChange={(e)=>setDelegateFrom(e.target.value)}/>
                         </CardContent>
                         <CardActions>
                             <Button variant="contained" onClick={delegate_your_vote}>Delegate</Button>
