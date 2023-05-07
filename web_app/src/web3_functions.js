@@ -98,9 +98,9 @@ async function startNewElection(contractInstance, account, _electionName){
         }
 }
 
-async function delegateYourVote(contractInstance, account, _delegateTo){
+async function delegateYourVote(contractInstance, account, _delegateTo, _delegateFrom){
     try {
-        let res2 = await contractInstance.methods.delegateYourVote(_delegateTo).send({from: account});
+        let res2 = await contractInstance.methods.delegateYourVote(_delegateTo, _delegateFrom).send({from: account});
         console.log("Res:",res2);
         return {error: false, message: res2.events.success.returnValues.msg}
         } catch (error) {

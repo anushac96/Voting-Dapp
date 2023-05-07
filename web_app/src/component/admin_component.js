@@ -26,6 +26,7 @@ function AdminComponent({account, contractInstance}) {
     const [voterAddress, setVoterAddress] = useState();
     const [electionName, setElectionName] = useState();
     const [delegateTo, setDelegateTo] = useState();
+    const [delegateFrom, setDelegateFrom] = useState();
     const [winnerAddress, setWinnerAddress] = useState("name");
 
     async function register_candidate(){
@@ -60,9 +61,10 @@ function AdminComponent({account, contractInstance}) {
         let result = await startNewElection(contractInstance, account, electionName);
         console.log("result:", result);
     }
+    
     async function delegate_your_vote(){
         console.log("name:", voterAddress);
-        let result = await delegateYourVote(contractInstance, account, delegateTo);
+        let result = await delegateYourVote(contractInstance, account, delegateTo, delegateFrom);
         console.log("result:", result);
     }
 
@@ -136,6 +138,8 @@ function AdminComponent({account, contractInstance}) {
                         <CardContent>
                             <TextField id="outlined-basic" label="Start New Election" variant="outlined" style={{width: '100%'}}
                                 onChange={(e)=>setElectionName(e.target.value)}/>
+                            <TextField id="outlined-basic" label="Delegate Your Vote From" variant="outlined" style={{width: '100%'}}
+                                onChange={(e)=>setDelegateFrom(e.target.value)}/>
                         </CardContent>
                         <CardActions>
                             <Button variant="contained" onClick={start_new_election}>Start New Election</Button>

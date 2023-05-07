@@ -22,6 +22,7 @@ contract Voting {
     struct Voter{
         bool registered; // if true, that person is already registered
         bool voted;  // if true, that person already voted
+        uint vote;
     }
 
 
@@ -63,50 +64,14 @@ contract Voting {
         //delete proposals;
     }
 
-        function delegateYourVote(address to) public {
+    function delegateYourVote(address delegateTo, address delegateFrom) public {
         // assigns reference
-        Voter storage sender = voterList[msg.sender];
-        require(!sender.voted, "You already voted.");
-        require(to != owner, "Owner can not vote!!");
-        require(to != msg.sender, "Self-delegation is disallowed.");
-
-        // Forward the delegation as long as
-        // `to` also delegated.
-        // In general, such loops are very dangerous,
-        // because if they run too long, they might
-        // need more gas than is available in a block.
-        // In this case, the delegation will not be executed,
-        // but in other situations, such loops might
-        // cause a contract to get "stuck" completely.
-
-        // while (candidateList[to].delegate != address(0)) {
-        //     to = voterList[to].delegate;
-
-        //     // We found a loop in the delegation, not allowed.
-        //     require(to != msg.sender, "Found loop in delegation.");
-        // }
-
-        // Voter storage delegate_ = candidateList[to];
-
-        // // Voters cannot delegate to accounts that cannot vote.
-        // require(delegate_.weight >= 1);
-
-        // // Since `sender` is a reference, this
-        // // modifies `voters[msg.sender]`.
-        // sender.voted = true;
-        // sender.delegate = to;
-
-        // if (delegate_.voted) {
-        //     // If the delegate already voted,
-        //     // directly add to the number of votes
-        //     candidateList[delegate_.vote].voteCount += sender.weight;
-        // } else {
-        //     // If the delegate did not vote yet,
-        //     // add to her weight.
-        //     delegate_.weight += sender.weight;
-        // }
-
-        candidateList[candidates[to]].votes++;
+        require(msg.sender == owner, "Only owner can allow!!");
+        require(!voterList[delegateFrom].voted, "You already voted.");
+        require(delegateTo != owner, "Owner can not vote!!");
+        require(delegateTo != delegateFrom, "Self-delegation is disallowed.");
+        voterList[delegateTo].vote++;
+        voterList[delegateFrom].voted = true;
         emit success("Delegated !!");
     }
 
@@ -117,7 +82,8 @@ contract Voting {
         require(voterList[_voterAddress].registered == false, "Voter already registered!!");
         Voter memory voter = Voter({
             registered: true,
-            voted: false
+            voted: false,
+            vote: 1
         });
 
         voterList[_voterAddress] = voter;
@@ -138,7 +104,8 @@ contract Voting {
         require(voterList[msg.sender].voted == false, "Already voted!!");
         require(candidateList[candidates[_candidateAddress]].registered == true, "Candidate not registered");
 
-        candidateList[candidates[_candidateAddress]].votes++;
+        candidateList[candidates[_candidateAddress]].votes += voterList[msg.sender].vote;
+        //candidateList[candidates[_candidateAddress]].votes++;
         voterList[msg.sender].voted =true;
         //candidateList[candidates].votes += candidateList[candidates[_candidateAddress]].weight;
         uint candidateVotes = candidateList[candidates[_candidateAddress]].votes;
