@@ -18,6 +18,9 @@ ADDED FEATURES - MADE IMPROVEMENT
 8. Total numbers of votes for each of the candidates
 9. Vote to candidate
 10. Display the winner of the election
+11. Display Candidate details
+12. Get voter status
+13. Eye catchy User Interface
 
 # Team Members
 1. Anusha Hadagali CWID: 885451450 Email ID: anusha.hadagali@csu.fullerton.edu

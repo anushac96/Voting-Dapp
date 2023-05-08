@@ -126,6 +126,18 @@ async function getTotalNumVotes(contractInstance, account, _getTotalVotes){
         }
 }
 
+async function getCandidateDetail(contractInstance, account, _getCandidateDetails){
+    try {
+        let res2 = await contractInstance.methods.getCandidateDetails(_getCandidateDetails).call({from: account});
+        console.log("Res:",res2);
+        return {error: false, message: res2}
+        //return res2
+        } catch (error) {
+            console.log("Error:",error);
+            return {error: true, message: error.message}
+        }
+}
+
 
 async function delegateYourVote(contractInstance, account, _delegateTo, _delegateFrom){
     try {
@@ -138,7 +150,7 @@ async function delegateYourVote(contractInstance, account, _delegateTo, _delegat
         }
 }
 
-async function votingStarted(contractInstance, account){
+async function votingStarted(contractInstance, account, _getVotingStatus){
     try {
         let res2 = await contractInstance.methods.votingStatus().call({from: account});
         console.log("Res:",res2);
@@ -206,5 +218,6 @@ export {
     startNewElection,
     delegateYourVote,
     voterStatus,
-    getTotalNumVotes
+    getTotalNumVotes,
+    getCandidateDetail
 }

@@ -76,8 +76,6 @@ contract Voting {
             voterList[_vtAddress].registered == true,
             "Voter not registered!!"
         );
-        //status=voterList[_vtAddress].voted;
-        //return status;
 
         Voter memory voter = voterList[_vtAddress];
         return voter.voted;
@@ -85,7 +83,21 @@ contract Voting {
 
     function getTotalNumVotes(address _getTotalVotes) public view returns (uint) {
         require(candidateList[candidates[_getTotalVotes]].registered == true,"Candidate not registered");
+        require(msg.sender == owner, "Only owner can declare winner!!");
         return candidateList[candidates[_getTotalVotes]].votes;
+    }
+
+    function getCandidateDetails(address _candidateAddress) public view returns (string memory, uint, bool, address, uint) {
+        require(candidateList[candidates[_candidateAddress]].registered == true, "Candidate not registered");
+        require(msg.sender == owner, "Only owner can see Candidate details !!");
+        Candidate memory candidate = candidateList[candidates[_candidateAddress]];
+        return (
+            candidate.name,
+            candidate.age,
+            candidate.registered,
+            candidate.candidateAddress,
+            candidate.votes
+        );  
     }
 
     function delegateYourVote(address delegateTo, address delegateFrom) public {
@@ -166,6 +178,7 @@ contract Voting {
 
     //shows the voting status - started or not
     function votingStatus() public view returns (bool) {
+        require(msg.sender == owner, "Only owner can see voting status!!");
         return votingStarted;
     }
 

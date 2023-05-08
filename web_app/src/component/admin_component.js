@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
-import {registerCandidates, whiteListAddress, getAllCandidate, getWinner, startVoting, stopVoting, startNewElection, delegateYourVote, voterStatus, getTotalNumVotes} from '../web3_functions'
+import {registerCandidates, whiteListAddress, getAllCandidate, getWinner, startVoting, stopVoting, startNewElection, delegateYourVote, voterStatus, getTotalNumVotes, getCandidateDetail, votingStarted} from '../web3_functions'
 
 const errorMsg = (
     <Alert severity="error">
@@ -30,6 +30,8 @@ function AdminComponent({account, contractInstance}) {
     const [delegateFrom, setDelegateFrom] = useState();
     const [winnerAddress, setWinnerAddress] = useState("name");
     const [getTotalVotes, setGetTotalVotes] = useState();
+    const [getCandidateDetails, setGetCandidateDetails] = useState();
+    const [getVotingStatus, setGetVotingStatus] = useState();
 
     async function register_candidate(){
         console.log("name:", candidateName);
@@ -50,6 +52,24 @@ function AdminComponent({account, contractInstance}) {
         let result = await getTotalNumVotes(contractInstance, account, getTotalVotes);
         console.log("result:", result.message);
         setGetTotalVotes(result.message);
+    }
+
+    async function get_Voting_Status(){
+        //console.log("name:", candidateName);
+        let result = await votingStarted(contractInstance, account, getVotingStatus);
+        console.log("result:", result.message);
+        setGetVotingStatus(result.message);
+    }
+
+    async function get_Candidate_Details(){
+        //console.log("name:", candidateName);
+        let result = await getCandidateDetail(contractInstance, account, getCandidateDetails);
+        console.log("result:", result.message);
+
+        if (!result.error) {
+            setCandidateName(result.message[0]);
+            setCandidateAge(result.message[1]);
+        }
     }
 
     async function start_voting(){
@@ -206,6 +226,35 @@ function AdminComponent({account, contractInstance}) {
                         </CardContent>
                         <CardActions>
                             <Button variant="contained" onClick={get_Total_Votes}>Get total number of votes</Button>
+                        </CardActions>
+                    </Card>
+
+                    <Card sx={{ maxWidth: 400, marginTop: 5, marginBottom: 5}}>
+                        <Typography gutterBottom variant="h5" component="div" align='left' paddingLeft={2} style={{marginTop: '10px'}}>
+                            Get Candidate Details
+                        </Typography>
+                        <CardContent>
+                            <TextField id="outlined-basic" label="Get Candidate Details" variant="outlined" style={{width: '100%'}}
+                                onChange={(e)=>setGetCandidateDetails(e.target.value)}/>
+                        </CardContent>
+                        <CardContent>
+                            <TextField id="outlined-basic" label="Name" variant="outlined" style={{ width: '100%' }} value={candidateName || ''} />
+                        </CardContent>
+                        <CardContent>
+                            <TextField id="outlined-basic" label="Age" variant="outlined" style={{ width: '100%' }} value={candidateAge || ''} 
+                            />
+                        </CardContent>
+                        <CardActions>
+                            <Button variant="contained" onClick={get_Candidate_Details}>Get Candidate Details</Button>
+                        </CardActions>
+                    </Card>
+
+                    <Card sx={{ maxWidth: 400, marginTop: 5, marginBottom: 5}}>
+                        <Typography gutterBottom variant="h5" component="div" align='left' paddingLeft={2} style={{marginTop: '10px'}}>
+                            Get Voting Status
+                        </Typography>
+                        <CardActions>
+                            <Button variant="contained" onClick={get_Voting_Status}>Get Voting Status</Button>
                         </CardActions>
                     </Card>
                 </div>
