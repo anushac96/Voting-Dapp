@@ -4,6 +4,9 @@ The project is built using the Ethereum blockchain and Solidity smart contracts,
 
 The repository contains the code for both the smart contract and the frontend application, and can be used as a reference or a starting point for developing similar decentralized applications. To run the application, the user needs to have npm, truffle, and Metamask installed on their system.
 
+We have improved and added few features which are mentioned below in the list of features
+ADDED FEATURES - MADE IMPROVEMENT
+
 # Features includes 
 1. Register Candidate
 2. Register Voter
@@ -15,7 +18,6 @@ The repository contains the code for both the smart contract and the frontend ap
 8. Total numbers of votes for each of the candidates
 9. Vote to candidate
 10. Display the winner of the election
-11. Eye catching User Inertface developed for the entire application in all the pages
 
 # Team Members
 1. Anusha Hadagali CWID: 885451450 Email ID: anusha.hadagali@csu.fullerton.edu

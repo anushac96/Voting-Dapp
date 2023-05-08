@@ -118,7 +118,8 @@ async function getTotalNumVotes(contractInstance, account, _getTotalVotes){
     try {
         let res2 = await contractInstance.methods.getTotalNumVotes(_getTotalVotes).call({from: account});
         console.log("Res:",res2);
-        return "Number of votes are",+res2
+        return {error: false, message: res2}
+        //return res2
         } catch (error) {
             console.log("Error:",error);
             return {error: true, message: error.message}

@@ -48,7 +48,8 @@ function AdminComponent({account, contractInstance}) {
     async function get_Total_Votes(){
         console.log("name:", candidateName);
         let result = await getTotalNumVotes(contractInstance, account, getTotalVotes);
-        console.log("result:", result);
+        console.log("result:", result.message);
+        setGetTotalVotes(result.message);
     }
 
     async function start_voting(){
@@ -200,7 +201,7 @@ function AdminComponent({account, contractInstance}) {
                             Get Total Votes of a Candidate
                         </Typography>
                         <CardContent>
-                            <TextField id="outlined-basic" label="Get Total Votes of a Candidate" variant="outlined" style={{width: '100%'}}
+                            <TextField id="outlined-basic" label="Get Total Votes of a Candidate" variant="outlined" style={{width: '100%'}} value ={getTotalVotes ||''}
                                 onChange={(e)=>setGetTotalVotes(e.target.value)}/>
                         </CardContent>
                         <CardActions>
