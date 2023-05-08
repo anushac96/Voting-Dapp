@@ -4,6 +4,18 @@ The project is built using the Ethereum blockchain and Solidity smart contracts,
 
 The repository contains the code for both the smart contract and the frontend application, and can be used as a reference or a starting point for developing similar decentralized applications. To run the application, the user needs to have npm, truffle, and Metamask installed on their system.
 
+# Features includes 
+1. Register Candidate
+2. Register Voter
+3. View Voter status
+4. Delegate the vote to other voter with respect to the address
+5. Start the voting/election process
+6. Stop the voting/election process
+7. Name the election
+8. Total numbers of votes for each of the candidates
+9. Vote to candidate
+10. Display the winner of the election
+
 # Team Members
 1. Anusha Hadagali CWID: 885451450 Email ID: anusha.hadagali@csu.fullerton.edu
 3. Surrajkumar Prabhu Venkatesh CWID: 885198499 Email ID: surrajkumar2000@csu.fullerton.edu
@@ -43,3 +55,7 @@ The repository contains the code for both the smart contract and the frontend ap
 2. Install dependencies: `npm install`
 4. Open metamask and create accounts for voters and candidates by using accounts provided by Ganach
 5. Run the react app: `npm start`
+
+
+#Repo of our project 
+https://github.com/anushac96/Voting-Dapp
