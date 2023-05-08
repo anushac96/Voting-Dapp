@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
-import {registerCandidates, whiteListAddress, getAllCandidate, getWinner, startVoting, stopVoting, startNewElection, delegateYourVote} from '../web3_functions'
+import {registerCandidates, whiteListAddress, getAllCandidate, getWinner, startVoting, stopVoting, startNewElection, delegateYourVote, voterStatus} from '../web3_functions'
 
 const errorMsg = (
     <Alert severity="error">
@@ -25,6 +25,7 @@ function AdminComponent({account, contractInstance}) {
     const [candidateAddress, setCandidatAddress] = useState();
     const [voterAddress, setVoterAddress] = useState();
     const [electionName, setElectionName] = useState();
+    const [voterStatusAddress, setVoterStatusAddress] = useState();
     const [delegateTo, setDelegateTo] = useState();
     const [delegateFrom, setDelegateFrom] = useState();
     const [winnerAddress, setWinnerAddress] = useState("name");
@@ -59,6 +60,12 @@ function AdminComponent({account, contractInstance}) {
     async function start_new_election(){
         console.log("name:", candidateName);
         let result = await startNewElection(contractInstance, account, electionName);
+        console.log("result:", result);
+    }
+
+    async function voter_status(){
+        console.log("name:", candidateName);
+        let result = await voterStatus(contractInstance, account, voterStatusAddress);
         console.log("result:", result);
     }
     
@@ -141,6 +148,19 @@ function AdminComponent({account, contractInstance}) {
                         </CardContent>
                         <CardActions>
                             <Button variant="contained" onClick={start_new_election}>Start New Election</Button>
+                        </CardActions>
+                    </Card>
+
+                    <Card sx={{ maxWidth: 400, marginTop: 5}}>
+                        <Typography gutterBottom variant="h5" component="div" align='left' paddingLeft={2}>
+                        Voter status
+                        </Typography>
+                        <CardContent>
+                            <TextField id="outlined-basic" label="Voter Status" variant="outlined" style={{width: '100%'}}
+                                onChange={(e)=>setVoterStatusAddress(e.target.value)}/>
+                        </CardContent>
+                        <CardActions>
+                            <Button variant="contained" onClick={voter_status}>Get Voter status</Button>
                         </CardActions>
                     </Card>
 

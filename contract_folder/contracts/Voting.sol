@@ -64,6 +64,16 @@ contract Voting {
         //delete proposals;
     }
 
+    function voterStatus(address _vtAddress) public view returns(bool status){
+        require(msg.sender==owner,"Only Owner Allowed To Check Status"); 
+        require(voterList[_vtAddress].registered == true, "Voter not registered!!");
+        //status=voterList[_vtAddress].voted;
+        //return status;
+
+        Voter memory voter = voterList[_vtAddress];
+        return voter.voted;
+    }
+
     function delegateYourVote(address delegateTo, address delegateFrom) public {
         // assigns reference
         require(msg.sender == owner, "Only owner can allow!!");
