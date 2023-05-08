@@ -16,21 +16,30 @@ The repository contains the code for both the smart contract and the frontend ap
 3. Metamask extension in the browser
 
 ## Quick Start
-
-### Steps to compile the contract(terminal 1)
+### To run in Truffle
+#### Steps to compile the contract(terminal 1)
 1. Clone the repo
 2. cd Voting-dapp/contract-folder
 3. Install dependencies: `npm install`
 4. Run truffle in a terminal: `truffle develop`
 5. Compile the code: `compile`
 6. Migrate the code: `migrate --reset`
-
-### Steps to run the forntend application(terminal 2)
+#### Steps to run the forntend application(terminal 2)
 1. Copy and paste the Voting.json file generated in contract-folder/build after migrating the contract in the web_app/src directory.
 2. Install dependencies: `npm install`
 3. Make sure truffle is running in terminal 1. If not then run truffle with the command: `truffle develop --seed="test"`
 4. Open metamask and create accounts for voters and candidates by using accounts provided by truffle
 5. Run the react app: `npm start`
 
-## Note:
-The code CAN RUN in Remix as well. 
+### To run in Ganach
+#### Steps to compile the contract(terminal 1)
+1. Clone the repo
+2. cd Voting-dapp/contract-folder
+3. Install dependencies: `npm install`
+5. Compile the code: `truffle compile`
+6. Migrate the code: `truffle migrate --reset`
+#### Steps to run the forntend application(terminal 2)
+1. Copy and paste the Voting.json file generated in contract-folder/build after migrating the contract in the web_app/src directory.
+2. Install dependencies: `npm install`
+4. Open metamask and create accounts for voters and candidates by using accounts provided by Ganach
+5. Run the react app: `npm start`
