@@ -204,7 +204,7 @@ function AdminComponent({account, contractInstance}) {
                                 onChange={(e)=>setGetTotalVotes(e.target.value)}/>
                         </CardContent>
                         <CardActions>
-                            <Button variant="contained" onClick={get_Total_Votes}>Register Voter</Button>
+                            <Button variant="contained" onClick={get_Total_Votes}>Get total number of votes</Button>
                         </CardActions>
                     </Card>
                 </div>
