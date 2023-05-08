@@ -15,6 +15,7 @@ The repository contains the code for both the smart contract and the frontend ap
 8. Total numbers of votes for each of the candidates
 9. Vote to candidate
 10. Display the winner of the election
+11. Eye catching User Inertface developed for the entire application in all the pages
 
 # Team Members
 1. Anusha Hadagali CWID: 885451450 Email ID: anusha.hadagali@csu.fullerton.edu
