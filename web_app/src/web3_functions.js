@@ -103,14 +103,22 @@ async function voterStatus(contractInstance, account, _voterStatusAddress){
         let res2 = await contractInstance.methods.voterStatus(_voterStatusAddress).call({from: account});
         console.log("Res:",res2);
         if(res2){
-            //$("#_voterStatusAddress").text("Voter Has Already Voted");
             return "Voter Has Already Voted";
         }
         else{
-            //$("#_voterStatusAddress").text("Voter Has Not Yet Voted");
             return "Voter Has Not Yet Voted";
         }
-        //return {error: false, message: res2.events.success.returnValues.msg}
+        } catch (error) {
+            console.log("Error:",error);
+            return {error: true, message: error.message}
+        }
+}
+
+async function getTotalNumVotes(contractInstance, account, _getTotalVotes){
+    try {
+        let res2 = await contractInstance.methods.getTotalNumVotes(_getTotalVotes).call({from: account});
+        console.log("Res:",res2);
+        return "Number of votes are",+res2
         } catch (error) {
             console.log("Error:",error);
             return {error: true, message: error.message}
@@ -196,5 +204,6 @@ export {
     votingStarted,
     startNewElection,
     delegateYourVote,
-    voterStatus
+    voterStatus,
+    getTotalNumVotes
 }

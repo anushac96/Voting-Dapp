@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
-import {registerCandidates, whiteListAddress, getAllCandidate, getWinner, startVoting, stopVoting, startNewElection, delegateYourVote, voterStatus} from '../web3_functions'
+import {registerCandidates, whiteListAddress, getAllCandidate, getWinner, startVoting, stopVoting, startNewElection, delegateYourVote, voterStatus, getTotalNumVotes} from '../web3_functions'
 
 const errorMsg = (
     <Alert severity="error">
@@ -29,6 +29,7 @@ function AdminComponent({account, contractInstance}) {
     const [delegateTo, setDelegateTo] = useState();
     const [delegateFrom, setDelegateFrom] = useState();
     const [winnerAddress, setWinnerAddress] = useState("name");
+    const [getTotalVotes, setGetTotalVotes] = useState();
 
     async function register_candidate(){
         console.log("name:", candidateName);
@@ -44,6 +45,12 @@ function AdminComponent({account, contractInstance}) {
     }
 
     
+    async function get_Total_Votes(){
+        console.log("name:", candidateName);
+        let result = await getTotalNumVotes(contractInstance, account, getTotalVotes);
+        console.log("result:", result);
+    }
+
     async function start_voting(){
         console.log("name:", candidateName);
         let result = await startVoting(contractInstance, account);
@@ -185,6 +192,19 @@ function AdminComponent({account, contractInstance}) {
                         </CardContent>
                         <CardActions>
                             <Button variant="contained" onClick={get_Winner}>Get Winner</Button>
+                        </CardActions>
+                    </Card>
+
+                    <Card sx={{ maxWidth: 400, marginTop: 5, marginBottom: 5}}>
+                        <Typography gutterBottom variant="h5" component="div" align='left' paddingLeft={2} style={{marginTop: '10px'}}>
+                            Get Total Votes of a Candidate
+                        </Typography>
+                        <CardContent>
+                            <TextField id="outlined-basic" label="Get Total Votes of a Candidate" variant="outlined" style={{width: '100%'}}
+                                onChange={(e)=>setGetTotalVotes(e.target.value)}/>
+                        </CardContent>
+                        <CardActions>
+                            <Button variant="contained" onClick={get_Total_Votes}>Register Voter</Button>
                         </CardActions>
                     </Card>
                 </div>
